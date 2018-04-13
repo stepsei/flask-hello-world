@@ -6,6 +6,10 @@ from flask import Flask
 # create the application object
 app = Flask(__name__)
 
+
+# error handling
+app.config["DEBUG"] = True
+
 # use the decorator pattern to 
 # link the view function to a url
 @app.route("/")
@@ -35,6 +39,14 @@ def float_type(value):
 def path_type(value):
 	print(value)
 	return "correct"
+
+# # dynamic route with explicit status codes
+@app.route("/name/<name>")
+def index(name):
+	if name.lower() == "michael":
+		return "Hello, {}".format(name)
+	else:
+		return "Not Found", 404
 	
 
 # start the development server using the run() method
